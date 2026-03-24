@@ -42,8 +42,8 @@ requests>=2.31.0
 # pydantic-settings>=2.1.0
 
 # =============================================================================
-# OPTIONAL: For standalone hello_world.py script
-# (These are needed if running hello_world.py outside DeerFlow)
+# OPTIONAL: For standalone hello_world_servers.py script
+# (These are needed if running hello_world_servers.py outside DeerFlow)
 # =============================================================================
 
 # For checking prerequisites
@@ -64,6 +64,6 @@ psutil>=5.9.0
 # NOTES:
 # 1. Main dependencies are managed by DeerFlow in deer-flow/pyproject.toml
 # 2. Run 'uv sync' in the deer-flow directory to install all dependencies
-# 3. This file is primarily for the hello_world.py demo script
+# 3. This file is primarily for the hello_world_servers.py demo script
 # 4. Core requirements: python-dotenv, requests, psutil
 # =============================================================================

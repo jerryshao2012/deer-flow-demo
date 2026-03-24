@@ -12,7 +12,7 @@ Prerequisites:
 4. DeerFlow server running (make dev)
 
 Usage:
-    python hello_world.py
+    python hello_world_servers.py
 """
 
 import os

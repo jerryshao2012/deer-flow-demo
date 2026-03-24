@@ -24,16 +24,7 @@ A comprehensive introduction to using DeerFlow with local Ollama LLM. Learn to b
 
 **No servers required!** Get results in under 5 minutes:
 
-**Option A: Using the setup script (Recommended)**
-```bash
-# Run the automated setup
-./setup.sh
-
-# After setup completes, start the demo
-./start.sh
-```
-
-**Option B: Manual setup**
+**Option A: Manual setup**
 ```bash
 # 1. Install dependencies
 cd deer-flow/backend
@@ -57,6 +48,8 @@ python ../../hello_world_library.py
 ### 🖥️ Full Platform (Server Mode)
 
 Complete experience with Web UI and REST API:
+
+**⚠️ Note:** The `setup.sh` and `start.sh` scripts are **only for Server Mode**. They set up and manage the full server infrastructure (Gateway + LangGraph + Web UI). Do NOT use these scripts for Library Mode.
 
 **Option A: Using the setup script (Recommended for first-time setup)**
 ```bash
@@ -860,11 +853,26 @@ Start with Library Mode for quick wins, then explore Server Mode when you need t
 
 ---
 
-## 🛠️ Setup Scripts Reference
+## 🛠️ Setup Scripts Reference (Server Mode Only)
 
-The project includes helper scripts to simplify common tasks:
+**⚠️ Important:** The following scripts (`setup.sh` and `start.sh`) are **only for Server Mode** (full platform with Web UI and REST API). They set up and manage multiple server processes.
 
-### `setup.sh` - Automated Initial Setup
+**For Library Mode:** Do NOT use these scripts. Instead, follow the manual setup steps in the [Library Mode section](#library-mode-deerflowclient).
+
+### When to Use These Scripts
+
+✅ **Use `setup.sh` and `start.sh` if you want:**
+- Web UI interface at http://localhost:2026
+- REST API access for multi-user applications
+- Full platform experience with Gateway + LangGraph servers
+- Team collaboration features
+
+❌ **Do NOT use these scripts if you want:**
+- Simple Python library integration (use Library Mode instead)
+- Single-script applications
+- Lightweight setup without server overhead
+
+### `setup.sh` - Automated Initial Setup (Server Mode)
 **Use this for first-time setup** - Automatically:
 - ✅ Checks Ollama and Nginx installation
 - ✅ Validates required Python/Node.js versions  
