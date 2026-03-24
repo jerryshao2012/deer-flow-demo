@@ -134,7 +134,7 @@ research:
 # =============================================================================
 server:
   # LangGraph server URL
-  langgraph_url: http://localhost:2024
+  langgraph_url: http://localhost:2026
   
   # Gateway API URL
   gateway_url: http://localhost:8001
@@ -163,7 +163,7 @@ logging:
 # =============================================================================
 channels:
   # LangGraph Server URL
-  langgraph_url: http://localhost:2024
+  langgraph_url: http://localhost:2026
   
   # Gateway API URL
   gateway_url: http://localhost:8001

@@ -86,7 +86,7 @@ Expected: JSON response with model list
 
 ### 3. Check DeerFlow Server
 ```bash
-curl http://localhost:2024/health
+curl http://localhost:2026/health
 ```
 Expected: `{"status": "ok"}` or similar
 

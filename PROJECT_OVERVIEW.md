@@ -205,7 +205,7 @@ Search: Tavily (requires API key)
    python hello_world.py    # Checks all prerequisites
    ollama list              # Verify models
    curl http://localhost:11434/api/tags  # Check Ollama
-   curl http://localhost:2024/health     # Check server
+   curl http://localhost:2026/health     # Check server
    ```
 
 3. **View Logs:**

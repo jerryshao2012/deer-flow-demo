@@ -64,7 +64,7 @@ uv run main.py                 # Run console UI only
 ### Testing Commands
 ```bash
 python hello_world.py          # Run the demo script
-curl http://localhost:2024/health      # Check server health
+curl http://localhost:2026/health      # Check server health
 curl http://localhost:11434/api/tags   # Check Ollama
 ```
 
@@ -191,7 +191,7 @@ User Query
     ↓
 DeerFlow Web UI (localhost:2026)
     ↓
-LangGraph Server (localhost:2024)
+LangGraph Server (localhost:2026)
     ↓
 Agent Orchestrator
     ├→ Ollama LLM (localhost:11434) - GLM-4-Flash
