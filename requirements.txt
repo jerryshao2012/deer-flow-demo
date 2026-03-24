@@ -17,6 +17,14 @@ requests>=2.31.0
 # The following are typically installed by DeerFlow itself:
 # =============================================================================
 
+# DeerFlow client library - provides DeerFlowClient
+# Install from local source after running 'uv sync' in deer-flow/backend
+# Uncomment the line below and adjust path as needed:
+# -e ./deer-flow/backend/packages/harness
+
+# Alternative: Install via uv workspace (recommended)
+# cd deer-flow/backend && uv sync
+
 # LangChain framework
 # langchain>=0.3.0
 # langchain-core>=0.3.0
