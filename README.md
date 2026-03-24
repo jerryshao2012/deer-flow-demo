@@ -34,10 +34,7 @@ uv sync
 cp ../../.env.example .env
 # Edit .env and add your TAVILY_API_KEY from https://app.tavily.com
 
-# 3. Test setup
-python ../../test_deerflow_client.py
-
-# 4. Run demo
+# 3. Test setup (optional)
 python ../../hello_world_library.py
 ```
 
@@ -186,6 +183,21 @@ client = DeerFlowClient()
 response = client.chat("What is quantum computing?")
 print(response)
 ```
+
+#### Running Diagnostics
+
+Test your setup and configuration with the built-in diagnostics:
+
+```bash
+# Run diagnostics to check prerequisites
+python hello_world_library.py --test
+```
+
+This will verify:
+- Ollama server connection
+- Model availability
+- Tavily API key configuration
+- Dependencies status
 
 #### Streaming Response (Recommended for long outputs)
 
@@ -767,10 +779,9 @@ make dev
 
 ### Day 1: Library Mode Basics (30 min)
 
-1. Run `test_deerflow_client.py` ✅
-2. Run `hello_world_library.py` ✅
-3. Try simple chat examples
-4. Read this README
+1. Run `hello_world_library.py` ✅
+2. Try simple chat examples
+3. Read this README
 
 ### Day 2: Advanced Library Mode (1 hour)
 
