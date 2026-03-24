@@ -1,0 +1,198 @@
+# DeerFlow Hello World Demo Configuration
+# Local Execution with Ollama + GLM-4-Flash
+
+# =============================================================================
+# MODEL CONFIGURATION
+# =============================================================================
+models:
+  # Primary model: Ollama local GLM-4-Flash
+  - name: ollama-glm4-flash
+    display_name: GLM-4-Flash (Ollama Local)
+    use: langchain_openai:ChatOpenAI
+    model: glm-4.7-flash:latest
+    base_url: http://localhost:11434/v1
+    api_key: ollama  # Ollama doesn't need a real API key
+    max_tokens: 4096
+    temperature: 0.7
+    timeout: 120
+    supports_thinking: true
+    supports_reasoning_effort: true
+
+  # Backup model: Qwen3.5 (uncomment to use)
+  # - name: ollama-qwen35
+  #   display_name: Qwen3.5 (Ollama Local)
+  #   use: langchain_openai:ChatOpenAI
+  #   model: qwen3.5:latest
+  #   base_url: http://localhost:11434/v1
+  #   api_key: ollama
+  #   max_tokens: 4096
+  #   temperature: 0.7
+  #   supports_thinking: true
+  #   supports_reasoning_effort: true
+
+# Default model to use
+default_model: ollama-glm4-flash
+
+# =============================================================================
+# SANDBOX CONFIGURATION - LOCAL EXECUTION
+# =============================================================================
+sandbox:
+  # Local Execution: Runs code directly on host machine
+  use: deerflow.sandbox.local_sandbox:LocalSandboxProvider
+  
+  # Local sandbox settings
+  settings:
+    # Working directory for sandbox execution
+    work_dir: ./sandbox_workspace
+    
+    # Timeout for code execution (seconds)
+    timeout: 300
+    
+    # Maximum output length
+    max_output_length: 10000
+    
+    # Whether to capture stdout/stderr
+    capture_output: true
+
+# =============================================================================
+# TOOLS & SKILLS CONFIGURATION
+# =============================================================================
+tools:
+  - name: web_search
+    group: web
+    use: deerflow.community.tavily.tools:web_search_tool
+  - name: web_fetch
+    group: web
+    use: deerflow.community.jina_ai.tools:web_fetch_tool
+  - name: bash
+    group: bash
+    use: deerflow.sandbox.tools:bash_tool
+  - name: read_file
+    group: file:read
+    use: deerflow.sandbox.tools:read_file_tool
+  - name: write_file
+    group: file:write
+    use: deerflow.sandbox.tools:write_file_tool
+
+tool_groups:
+  - name: web
+  - name: file:read
+  - name: file:write
+  - name: bash
+
+# =============================================================================
+# MEMORY CONFIGURATION
+# =============================================================================
+memory:
+  # Enable short-term memory within sessions
+  short_term:
+    enabled: true
+    max_messages: 50
+    
+  # Enable long-term memory across sessions
+  long_term:
+    enabled: false  # Disable for simple demo
+    # storage: deerflow.memory.storage.sqlite:SQLiteStorage
+    # db_path: ./data/memory.db
+
+# =============================================================================
+# AGENT CONFIGURATION
+# =============================================================================
+agent:
+  # Default agent configuration
+  default:
+    # Role/prompt prefix
+    system_prompt: |
+      You are a helpful AI assistant powered by a local LLM (GLM-4-Flash).
+      You can search the web, execute code locally, and help users with various tasks.
+      Always be honest about limitations of local models.
+      
+    # Maximum iterations for complex tasks
+    max_iterations: 10
+    
+    # Verbose logging for learning
+    verbose: true
+
+# =============================================================================
+# RESEARCH CONFIGURATION
+# =============================================================================
+research:
+  # Maximum research iterations
+  max_plan_iterations: 3
+  
+  # Maximum steps per research task
+  max_step_num: 5
+  
+  # Auto-accept research plan
+  auto_accept_plan: false
+  
+  # Search engine preference
+  search_api: tavily
+
+# =============================================================================
+# API & SERVER CONFIGURATION
+# =============================================================================
+server:
+  # LangGraph server URL
+  langgraph_url: http://localhost:2024
+  
+  # Gateway API URL
+  gateway_url: http://localhost:8001
+  
+  # Web UI port
+  web_port: 2026
+
+# =============================================================================
+# LOGGING CONFIGURATION
+# =============================================================================
+logging:
+  # Log level: DEBUG, INFO, WARNING, ERROR
+  level: INFO
+  
+  # Log format
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  
+  # Log to file
+  file: ./logs/deerflow.log
+  
+  # Also log to console
+  console: true
+
+# =============================================================================
+# CHANNELS CONFIGURATION (Optional)
+# =============================================================================
+channels:
+  # LangGraph Server URL
+  langgraph_url: http://localhost:2024
+  
+  # Gateway API URL
+  gateway_url: http://localhost:8001
+  
+  # Session defaults
+  session:
+    assistant_id: lead_agent
+    thread_ttl: 3600  # 1 hour
+
+# =============================================================================
+# ADVANCED SETTINGS
+# =============================================================================
+advanced:
+  # Enable/disable specific features
+  enable_mcp_servers: false  # Disable for simple demo
+  enable_sub_agents: true
+  enable_context_engineering: true
+  
+  # Rate limiting
+  rate_limit:
+    requests_per_minute: 10
+    tokens_per_minute: 100000
+    
+  # Retry configuration
+  retry:
+    max_retries: 3
+    retry_delay: 2  # seconds
+
+config_version: 3
+checkpointer:
+  type: sqlite
+  connection_string: checkpoints.db
