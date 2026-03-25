@@ -27,13 +27,13 @@ Usage:
     python ../../hello_world_library.py
     
     # Or using uv:
-    uv run python ../../hello_world_library.py
+    uv run --active python ../../hello_world_library.py
     
 Run diagnostics first:
     cd deer-flow/backend
     python ../../hello_world_library.py --test
     # or
-    uv run python ../../hello_world_library.py --test
+    uv run --active python ../../hello_world_library.py --test
 """
 
 import argparse
