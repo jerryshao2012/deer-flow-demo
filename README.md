@@ -137,16 +137,21 @@ print(response)
 
 ### Installation
 
-**Method 1: Using uv (Recommended)**
+**Using uv (Recommended)**
 
 ```bash
-cd deer-flow/backend
-uv sync
+# Add the local harness package to your project
+uv add ./deer-flow/backend/packages/harness
+
+# (Optional) If you want to sync existing backend dependencies
+cd deer-flow/backend && uv sync
 ```
 
 This installs the `deerflow-harness` package which includes `DeerFlowClient`.
 
-**Method 2: Editable Install (Alternative)**
+**Alternative: Manual Editable Install**
+
+If you are not using `uv`, ensure you are in the correct Python environment:
 
 ```bash
 pip install -e ./deer-flow/backend/packages/harness
@@ -189,7 +194,10 @@ print(response)
 Test your setup and configuration with the built-in diagnostics:
 
 ```bash
-# Run diagnostics to check prerequisites
+# Run diagnostics using uv (recommended)
+uv run python hello_world_library.py --test
+
+# Or using your local python environment
 python hello_world_library.py --test
 ```
 

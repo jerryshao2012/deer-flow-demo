@@ -195,4 +195,4 @@ advanced:
 config_version: 3
 checkpointer:
   type: sqlite
-  connection_string: checkpoints.db
+  connection_string: deer-flow/backend/.deer-flow/checkpoints.db

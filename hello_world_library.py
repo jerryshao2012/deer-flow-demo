@@ -20,10 +20,20 @@ Installation:
     # This installs the deerflow package with DeerFlowClient
     
 Usage:
-    python hello_world_library.py
+    # IMPORTANT: Run from the deer-flow/backend directory to ensure correct config path resolution
+    cd deer-flow/backend
+    
+    # Then run the script:
+    python ../../hello_world_library.py
+    
+    # Or using uv:
+    uv run python ../../hello_world_library.py
     
 Run diagnostics first:
-    python hello_world_library.py --test
+    cd deer-flow/backend
+    python ../../hello_world_library.py --test
+    # or
+    uv run python ../../hello_world_library.py --test
 """
 
 import argparse
@@ -60,10 +70,10 @@ def run_diagnostics():
     except ImportError as e:
         print(f"   ❌ Import failed: {e}\n")
         print("💡 Solution:")
-        print("   1. Navigate to deer-flow/backend directory")
-        print("   2. Run: uv sync")
-        print("      This installs deerflow-harness package locally")
-        print("   3. Try running this test again\n")
+        print("   1. Add the local harness package:")
+        print("      uv add ./deer-flow/backend/packages/harness")
+        print("   2. (Optional) Navigate to deer-flow/backend and run: uv sync")
+        print("   3. Try running this test again using: uv run python hello_world_library.py --test\n")
         print("📚 Installation command:")
         print("   cd deer-flow/backend && uv sync\n")
         print("⚠️  Important: deerflow-harness is not on PyPI.")
@@ -93,11 +103,15 @@ def run_diagnostics():
         print("   ✅ Client initialized successfully!\n")
         tests_passed += 1
     except Exception as e:
-        print(f"   ❌ Initialization failed: {e}\n")
+        print("   ❌ Initialization failed: {e}\n")
         print("💡 Possible issues:")
         print("   - Missing config.yaml file")
         print("   - Environment variables not set")
-        print("   - Dependencies not installed\n")
+        print("   - Dependencies not installed")
+        print("   - Script not run from deer-flow/backend directory\n")
+        print("💡 Solution:")
+        print("   Make sure you're running the script from the deer-flow/backend directory:")
+        print("   cd deer-flow/backend && python ../../hello_world_library.py --test\n")
         return False
 
     # Test 4: List models
@@ -203,11 +217,12 @@ def check_prerequisites():
         from deerflow.client import DeerFlowClient
         print("   ✅ DeerFlow library available")
     except ImportError as e:
-        print(f"   ❌ Cannot import DeerFlow: {e}")
-        print("   💡 Solution: Run 'uv sync' in deer-flow/backend directory")
+        print("   ❌ Cannot import DeerFlow: {e}")
+        print("   💡 Solution: Add the local harness package:")
+        print("      uv add ./deer-flow/backend/packages/harness")
         print("   📚 Installation steps:")
-        print("      1. cd deer-flow/backend")
-        print("      2. uv sync")
+        print("      1. uv add ./deer-flow/backend/packages/harness")
+        print("      2. (Optional) cd deer-flow/backend && uv sync")
         print("      3. This installs deerflow-harness package")
         checks_passed = False
 
@@ -397,6 +412,8 @@ def main():
     print("Mode: Embedded (No Servers Required)")
     print("Model: Configured in config.yaml")
     print("Search: Tavily API\n")
+    print("💡 IMPORTANT: This script should be run from the deer-flow/backend directory")
+    print("   to ensure correct configuration path resolution.\n")
 
     # Check prerequisites
     if not check_prerequisites():
